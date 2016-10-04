@@ -1,14 +1,11 @@
-package hu.tb.bootstrap;
+package hu.tb.init;
 
-import hu.tb.product.Product;
 import hu.tb.product.ProductRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 
 /**
  * Created by Tivadar Bocz on 2016.10.03..
@@ -24,7 +21,7 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-
+/*
         Product shirt = new Product();
         shirt.setDescription("Spring Framework Guru Shirt");
         shirt.setPrice(new BigDecimal("18.95"));
@@ -41,5 +38,22 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
         productRepository.save(mug);
 
         log.info("Saved Mug - id:" + mug.getId());
+
+
+        User user = new User();
+        user.setId(1);
+        user.setUserName("user");
+        user.setPassword("user");
+        user.setEnabled(true);
+
+        Set<User> userSet = new HashSet<>();
+        userSet.add(user);
+
+        Set<Role> roleSet = new HashSet<>();
+        Role role = new Role();
+        role.setId(1);
+        role.setUsers(userSet);
+        roleSet.add(role);
+        user.setRoles(roleSet);*/
     }
 }
