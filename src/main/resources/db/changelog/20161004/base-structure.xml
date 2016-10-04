@@ -1,0 +1,119 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+
+    <changeSet id="base table structure" author="Tivadar Bocz">
+        <createTable tableName="user">
+            <column name="user_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(64)">
+                <constraints unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)">
+            </column>
+            <column name="email" type="varchar(128)">
+                <constraints unique="true"/>
+            </column>
+            <column name="first_name" type="varchar(64)">
+            </column>
+            <column name="last_name" type="varchar(64)">
+            </column>
+            <column name="role" type="varchar(64)">
+            </column>
+            <column name="disabled" type="boolean">
+            </column>
+            <column name="created_on" type="timestamp">
+            </column>
+            <column name="created_by" type="varchar(64)">
+            </column>
+        </createTable>
+        <createTable tableName="product">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="version" type="int">
+            </column>
+            <column name="product_id" type="varchar(255)">
+            </column>
+            <column name="description" type="varchar(255)">
+            </column>
+            <column name="image_url" type="varchar(255)">
+            </column>
+            <column name="price" type="DECIMAL">
+            </column>
+        </createTable>
+
+        <createTable tableName="role">
+            <column name="role_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role_name" type="varchar(32)">
+                <constraints unique="true"/>
+            </column>
+        </createTable>
+<!--
+        <createTable tableName="user_x_role">
+            <column name="user_role_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+            </column>
+            <column name="role_id" type="int">
+            </column>
+        </createTable>
+-->
+        <insert tableName="user">
+            <column name="user_name">admin</column>
+            <column name="password">21232f297a57a5a743894a0e4a801fc3</column>
+            <column name="first_name">Joshua</column>
+            <column name="last_name">Brown</column>
+            <column name="role">admin</column>
+            <column name="disabled">f</column>
+            <column name="created_by">system</column>
+        </insert>
+        <insert tableName="user">
+            <column name="user_name">user</column>
+            <column name="password">ee11cbb19052e40b07aac0ca060c23ee</column>
+            <column name="first_name">Margery</column>
+            <column name="last_name">Dedo</column>
+            <column name="role">user</column>
+            <column name="disabled">f</column>
+            <column name="created_by">system</column>
+        </insert>
+
+        <insert tableName="product">
+            <column name="product_id">235268845711068308</column>
+            <column name="description">Spring Framework Guru Shirt</column>
+            <column name="image_url">https://springframework.guru/wp-content/uploads/2015/04/spring_framework_guru_shirt-rf412049699c14ba5b68bb1c09182bfa2_8nax2_512.jpg</column>
+            <column name="price">18.95</column>
+        </insert>
+
+        <insert tableName="product">
+            <column name="product_id">168639393495335947</column>
+            <column name="description">Spring Framework Guru Mug</column>
+            <column name="image_url">https://springframework.guru/wp-content/uploads/2015/04/spring_framework_guru_coffee_mug-r11e7694903c348e1a667dfd2f1474d95_x7j54_8byvr_512.jpg</column>
+        </insert>
+
+        <insert tableName="role">
+            <column name="role_name">ROLE_USER</column>
+        </insert>
+        <insert tableName="role">
+            <column name="role_name">ROLE_ADMIN</column>
+        </insert>
+        <!--
+        <insert tableName="user_x_role">
+            <column name="user_id">1</column>
+            <column name="role_id">1</column>
+        </insert>
+        <insert tableName="user_x_role">
+            <column name="user_id">1</column>
+            <column name="role_id">2</column>
+        </insert>
+        <insert tableName="user_x_role">
+            <column name="user_id">2</column>
+            <column name="role_id">1</column>
+        </insert>-->
+    </changeSet>
+</databaseChangeLog>
