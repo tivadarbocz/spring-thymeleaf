@@ -5,7 +5,7 @@
 
     <changeSet id="base table structure" author="Tivadar Bocz">
         <createTable tableName="user">
-            <column name="user_id" type="int" autoIncrement="true">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="user_name" type="varchar(64)">
@@ -46,7 +46,7 @@
         </createTable>
 
         <createTable tableName="role">
-            <column name="role_id" type="int" autoIncrement="true">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="role_name" type="varchar(32)">
