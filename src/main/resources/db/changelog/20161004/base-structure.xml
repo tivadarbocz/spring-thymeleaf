@@ -2,7 +2,6 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-
     <changeSet id="base table structure" author="Tivadar Bocz">
         <createTable tableName="user">
             <column name="id" type="int" autoIncrement="true">
@@ -43,26 +42,59 @@
             </column>
             <column name="price" type="DECIMAL">
             </column>
+
         </createTable>
 
         <createTable tableName="role">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="user_id" type="int" >
+                <constraints nullable="false"/>
+            </column>
             <column name="role_name" type="varchar(32)">
-                <constraints unique="true"/>
+                <constraints/>
             </column>
         </createTable>
-<!--
-        <createTable tableName="user_x_role">
-            <column name="user_role_id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="user_id" type="int">
-            </column>
-            <column name="role_id" type="int">
-            </column>
-        </createTable>
+        <!--
+                <createTable tableName="role">
+                    <column name="id" type="int" autoIncrement="true">
+                        <constraints primaryKey="true" nullable="false"/>
+                    </column>
+                    <column name="role_name" type="varchar(32)">
+                        <constraints unique="true"/>
+                    </column>
+                </createTable>
+
+                <createTable tableName="user_x_role">
+                    <column name="user_role_id" type="int" autoIncrement="true">
+                        <constraints primaryKey="true" nullable="false"/>
+                    </column>
+                    <column name="user_id" type="int">
+                    </column>
+                    <column name="role_id" type="int">
+                    </column>
+                </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_x_role"
+                                 constraintName="fk_user_user_x_role"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="user_x_role"
+                                 constraintName="fk_role_user_x_role"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="role"/>
 -->
         <insert tableName="user">
             <column name="user_name">admin</column>
@@ -95,14 +127,30 @@
             <column name="description">Spring Framework Guru Mug</column>
             <column name="image_url">https://springframework.guru/wp-content/uploads/2015/04/spring_framework_guru_coffee_mug-r11e7694903c348e1a667dfd2f1474d95_x7j54_8byvr_512.jpg</column>
         </insert>
-
+        <insert tableName="role">
+            <column name="role_name">ROLE_USER</column>
+            <column name="user_id">1</column>
+        </insert>
+        <insert tableName="role">
+            <column name="role_name">ROLE_Admin</column>
+            <column name="user_id">1</column>
+        </insert>
+        <insert tableName="role">
+            <column name="role_name">ROLE_USER</column>
+            <column name="user_id">2</column>
+        </insert>
+        <insert tableName="role">
+            <column name="role_name">ROLE_Admin</column>
+            <column name="user_id">2</column>
+        </insert>
+<!--
         <insert tableName="role">
             <column name="role_name">ROLE_USER</column>
         </insert>
         <insert tableName="role">
             <column name="role_name">ROLE_ADMIN</column>
         </insert>
-        <!--
+
         <insert tableName="user_x_role">
             <column name="user_id">1</column>
             <column name="role_id">1</column>
@@ -114,6 +162,7 @@
         <insert tableName="user_x_role">
             <column name="user_id">2</column>
             <column name="role_id">1</column>
-        </insert>-->
+        </insert>
+        -->
     </changeSet>
 </databaseChangeLog>

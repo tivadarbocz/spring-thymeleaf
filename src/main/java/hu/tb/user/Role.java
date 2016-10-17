@@ -6,13 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * Created by Tivadar Bocz on 2016.10.04..
+ * Created by Admin on 2016.10.17..
  */
 @Entity
 public class Role {
     private int id;
+    private int userId;
     private String roleName;
     private String role;
+
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
     public int getId() {
@@ -21,6 +23,16 @@ public class Role {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "user_id", nullable = false, insertable = true, updatable = true)
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Basic
@@ -51,6 +63,7 @@ public class Role {
         Role role1 = (Role) o;
 
         if (id != role1.id) return false;
+        if (userId != role1.userId) return false;
         if (roleName != null ? !roleName.equals(role1.roleName) : role1.roleName != null) return false;
         if (role != null ? !role.equals(role1.role) : role1.role != null) return false;
 
@@ -60,6 +73,7 @@ public class Role {
     @Override
     public int hashCode() {
         int result = id;
+        result = 31 * result + userId;
         result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;

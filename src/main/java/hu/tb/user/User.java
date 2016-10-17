@@ -2,10 +2,9 @@ package hu.tb.user;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Set;
 
 /**
- * Created by Admin on 2016.10.04..
+ * Created by Admin on 2016.10.17..
  */
 @Entity
 @Table(name = "user", schema = "public")
@@ -20,14 +19,6 @@ public class User {
     private Boolean disabled;
     private Timestamp createdOn;
     private String createdBy;
-    @Transient
-    private Set<Role> roleSet;
-/*
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinTable(name="user_x_role",
-            joinColumns={@JoinColumn(name="fk_user_user_x_role", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="fk_role_user_x_role", referencedColumnName="id")})
-    private Role role;*/
 
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
@@ -125,16 +116,6 @@ public class User {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
-    }
-
-    @Transient
-    public Set<Role> getRoleSet() {
-        return roleSet;
-    }
-
-    @Transient
-    public void setRoleSet(Set<Role> roleSet) {
-        this.roleSet = roleSet;
     }
 
     @Override

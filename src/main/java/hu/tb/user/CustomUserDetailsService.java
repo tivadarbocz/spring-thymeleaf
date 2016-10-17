@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private RoleRepository roleRepository;
 
     public CustomUserDetailsService(UserRepository userRepository, RoleRepository roleRepository){
-        this.userRepository=userRepository;
+        this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
 
@@ -39,6 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 return null;
             }
             LOGGER.debug(" user from username " + user.toString());
+
             return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), getAuthorities(user));
         }
         catch (Exception e){
@@ -50,12 +51,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         //TODO kiszedni roleokat usernek
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
         //for(Role role : user.getRoles()) {
-        for(Role role : roleRepository.getUserRoles()) {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRole());
+        for(Role role : roleRepository.getUserRoles(user.getId())) {
+            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRoleName());
         authorities.add(grantedAuthority);
         }
         LOGGER.debug("user authorities are " + authorities.toString());
-        user.setRoleSet(roleRepository.getUserRoles());
+        //user.setRoleSet(roleRepository.getUserRoles());
         return authorities;
     }
 
